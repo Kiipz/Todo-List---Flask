@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block head %}
+    <title>Todo Home</title>
+{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="col-6" style="margin: auto;">
+            <h2>Todo List with flask</h2>
+            <table class="table">
+                <tr>
+                    <th>Task</th>
+                    <th>Actions</th>
+                </tr>
+                {% if tasks|length < 1  %}
+                <tr>
+                    <td colspan="2">
+                        <h4>There are no tasks. Create one below!</h4>
+                    </td>
+                </tr>
+                {% endif %}
+                {% for task in tasks %}
+                <tr>
+                    <td>{{ task.content }}</td>
+                    <td>
+                        <a class="btn btn-sm btn-outline-danger" href="delete/{{task.id}}">Delete</a>
+                        <a class="btn btn-sm btn-outline-primary" href="update/{{task.id}}">Update</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </table>
+            <div class="mt-5">
+                <h3>Add ToDo</h3>
+                <form action="/" method="post">
+                    <input class="form-control" type="text" name="content" id="content">
+                    <input class="btn btn-sm btn-success mt-2" type="submit" value="Add Task">
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}
